@@ -1,0 +1,66 @@
+# Day 1: Learning and Execution Summary
+
+## Prerequisites
+
+Before proceeding, ensure you have the following installed on your system:
+
+- CMake (version 3.10 or higher)
+- GCC or Clang (C++ compiler)
+- NASM (Netwide Assembler)
+- LD (GNU Linker)
+
+## Setup Instructions
+
+### 1. Create a Build Directory
+Organize the build files by creating a separate directory:
+
+mkdir build
+
+### 2. Generate Build Files with CMake
+Run the following command to generate the necessary build files:
+
+cmake -S . -B build/
+
+### 3. Compile the Project
+Build the project using CMake:
+
+cmake --build build/
+
+## Running the Compiler
+
+### 1. Create a Test File
+Create a file named test.hy and add the following content:
+
+return 51;
+
+### 2. Run the Compiler
+Execute the following command to compile the test file:
+
+./build/hydro test.hy
+
+### 3. Run the Generated Executable
+Execute the compiled output:
+
+./out
+
+### 4. Verify the Exit Status
+Check the program's exit status:
+
+echo $?
+
+Expected output:
+
+51
+
+## Example Output
+
+When the compiler runs successfully, you should see output similar to the following:
+
+global _start
+_start:
+   mov rax, 60
+   mov rdi, 51
+   syscall
+Assembly code written to out.asm
+NASM command exit status: 0
+LD command exit status: 0

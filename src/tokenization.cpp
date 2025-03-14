@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+// Tokenization
 enum class TokenType {
     exit,
     int_lit,
@@ -205,35 +207,70 @@ std::vector<Token> tokenize(std::string s)
     return tokens;
 }
 
+// Parsing
+struct NodeExpr {
+    Token int_lit;
+};
+struct NodeExit {
+    NodeExpr expr;
+};
+
+class Parser { };
+std::optional<NodeExpr> parse_expr(Token token)
+{
+
+    if (token.type == TokenType::int_lit) {
+        // cout<<token.value.value()<<endl;
+        return NodeExpr { .int_lit = token };
+    }
+    else
+        return {};
+}
+std::optional<NodeExit> parse(std::vector<Token>& tokens)
+{
+
+    int i = 0;
+    int n = tokens.size();
+    std::optional<NodeExit> exit_node;
+    while (i < n) {
+        if (i < n && tokens[i].type == TokenType::exit) {
+            i++;
+            if (i < n) {
+                auto node_expr = parse_expr(tokens[i]);
+                exit_node = NodeExit { .expr = node_expr.value() };
+                i++;
+            }
+        }
+        else {
+            std::cerr << "Invalid expression" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        if ((i >= n) || (tokens[i].type != TokenType::semi)) {
+            cout << "Error" << endl;
+        };
+        i++;
+    }
+
+    // if (exit_node.has_value()) {
+    //     std::cout << exit_node.value().expr.int_lit.value.value() << std::endl;
+    // }
+
+    return exit_node;
+}
+
 int main()
 {
-    std::string s = "let y = (10 - 2 * 3) / 2;\n"
-    "        let x\n"
-    "        = 7; // first\n"
-    "    // first\n"
-    "    if (x) {\n"
-    "        x = 1;\n"
-    "    }\n"
-    "    elif (0)\n"
-    "    {\n"
-    "        x = 2;\n"
-    "    }\n"
-    "    else\n"
-    "    {\n"
-    "        x = 3;\n"
-    "    }\n"
-    "\n"
-    "    exit(x);\n"
-    "\n"
-    "    /*\n"
-    "    exit(4);\n"
-    "    */\n"
-    "    ";
+    std::string s = "exit 45;";
 
-        std::vector<Token>
-            tokens = tokenize(s);
-    for (auto token: tokens) {
-        cout << to_string(token.type) <<" "<<(token.value.has_value()?token.value.value():"NULL")<<endl;
+    std::vector<Token> tokens = tokenize(s);
+    for (auto token : tokens) {
+        cout << to_string(token.type) << " " << (token.value.has_value() ? token.value.value() : "NULL") << endl;
+    }
+    if (parse(tokens)) {
+        auto val = parse(tokens);
+        if(val.has_value()){
+        std::cout << val.value().expr.int_lit.value.value() << std::endl;
+        }
     }
     return 0;
 }

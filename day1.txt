@@ -1,5 +1,14 @@
 # Day 1: Learning and Execution Summary
+TO RUN THIS File
+1->cmake --build build/
+2->./build/hydro test.hy
+3->./out
+4->echo $?
 
+cmake --build build/
+./build/hydro test.hy
+./out
+echo $?
 ## Prerequisites
 
 Before proceeding, ensure you have the following installed on your system:

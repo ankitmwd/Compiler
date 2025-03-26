@@ -1,7 +1,7 @@
 # MyCompiler
 
 ## Overview
-MyCompiler is a simple programming language with its own syntax and parser. This project includes tokenization, parsing, and evaluation of expressions based on a well-defined grammar. The compiler supports variable assignments, conditional statements, and arithmetic operations.
+MyCompiler is a simple programming language with its own syntax and parser. This project includes tokenization, parsing, and evaluation of expressions based on a well-defined grammar. The compiler supports variable assignments, conditional statements, and arithmetic operations. Additionally, the compiler also generates assembly code.
 
 ## Features
 - Variable declaration and assignment (`let ident = Expr;`)
@@ -36,6 +36,8 @@ Term      -> int_lit | ident | (Expr)
 ├── 📄 parser.hpp         # Parser implementation
 ├── 📄 main               # Entry point for execution
 ├── 📄 tokenization       # Tokenization logic
+├── 📄 generation         # Generating Assembly code
+
 ```
 
 ## Installation
